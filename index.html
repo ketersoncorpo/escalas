@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content=device-width, initial-scale=1.0 />
   <title>Visualizador de Escalas</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -13,12 +13,6 @@
 
   <main>
     <section class="controls">
-      <label for="notation">Notación:</label>
-<select id="notation">
-  <option value="english">C D E F G A B</option>
-  <option value="latin">Do Re Mi Fa Sol La Si</option>
-</select>
-
       <label for="instrument">Instrumento:</label>
       <select id="instrument">
         <option value="guitar">Guitarra</option>
@@ -41,10 +35,19 @@
         <option value="minor">Relativa Menor</option>
       </select>
 
+      <label for="notation">Notación:</label>
+      <select id="notation">
+        <option value="english">C D E F G A B</option>
+        <option value="latin">Do Re Mi Fa Sol La Si</option>
+      </select>
+
       <button id="showButton">Mostrar escala</button>
     </section>
 
-    <section id="fretboard" class="fretboard"></section>
+    <div class="fretboard-container">
+      <img id="fretboard-image" src="fretboard-guitar.png" alt="Diapasón" />
+      <div id="fretboard" class="fretboard"></div>
+    </div>
   </main>
 
   <footer>

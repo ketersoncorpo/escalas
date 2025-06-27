@@ -29,16 +29,28 @@ select, button {
   padding: 6px 10px;
 }
 
+.fretboard-container {
+  position: relative;
+  display: inline-block;
+}
+
+#fretboard-image {
+  width: 100%;
+  max-width: 960px;
+  display: block;
+}
+
 .fretboard {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: grid;
-  justify-content: center;
-  gap: 1px;
+  pointer-events: none;
 }
 
 .fret {
   width: 60px;
   height: 50px;
-  border: 1px solid #ccc;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,12 +60,13 @@ select, button {
   background-color: #6200ea;
   color: white;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  pointer-events: auto;
 }
 
 .root {
