@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content=device-width, initial-scale=1.0 />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Visualizador de Escalas</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -28,18 +28,21 @@
       <label for="scale">Escala:</label>
       <select id="scale"></select>
 
-      <label for="relative">Ver relativa:</label>
+      <label for="relative">Relativa:</label>
       <select id="relative">
         <option value="none">Ninguna</option>
-        <option value="major">Relativa Mayor</option>
-        <option value="minor">Relativa Menor</option>
+        <option value="major">Mayor</option>
+        <option value="minor">Menor</option>
       </select>
 
       <label for="notation">Notación:</label>
       <select id="notation">
-        <option value="english">C D E F G A B</option>
-        <option value="latin">Do Re Mi Fa Sol La Si</option>
+        <option value="english">Notación Inglesa (C D E F G A B)</option>
+        <option value="latin">Notación Latina (Do Re Mi Fa Sol La Si)</option>
       </select>
+
+      <label><input type="checkbox" id="showDegrees" /> Mostrar grados</label>
+      <label><input type="checkbox" id="showChords" /> Mostrar acordes</label>
 
       <button id="showButton">Mostrar escala</button>
     </section>

@@ -1,5 +1,6 @@
 const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 const latinNotes = ['Do', 'Do#', 'Re', 'Re#', 'Mi', 'Fa', 'Fa#', 'Sol', 'Sol#', 'La', 'La#', 'Si'];
+const degreeNames = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
 
 const scales = {
   ionian: { name: "Jónico (Mayor)", intervals: [0, 2, 4, 5, 7, 9, 11] },
@@ -58,7 +59,13 @@ function updateTuningOptions() {
   for (const [key, strings] of Object.entries(tunings[instrument])) {
     const opt = document.createElement('option');
     opt.value = key;
-    opt.textContent = `${strings.join(' ')}`;
+
+    let label = '';
+    if (key === 'standard') label = 'Afinación estándar';
+    else if (key === 'dropD') label = 'Drop D';
+    else if (key === '5string') label = '5 cuerdas';
+
+    opt.textContent = `${label} (${strings.join(' ')})`;
     tuningSelect.appendChild(opt);
   }
 
@@ -76,6 +83,19 @@ function getScaleNotes(root, scaleType, relativeType = 'none') {
   return intervals.map(i => notes[(rootIndex + i) % 12]);
 }
 
+function getChordType(interval) {
+  switch (interval) {
+    case 0: return '';           // I mayor
+    case 2: return 'm';          // II menor
+    case 4: return 'm';          // III menor
+    case 5: return '';           // IV mayor
+    case 7: return '';           // V mayor
+    case 9: return 'm';          // VI menor
+    case 11: return 'dim';       // VII disminuido
+    default: return '';
+  }
+}
+
 function drawFretboard() {
   const instrument = document.getElementById('instrument').value;
   const tuningKey = document.getElementById('tuning').value;
@@ -83,17 +103,30 @@ function drawFretboard() {
   const scaleType = document.getElementById('scale').value;
   const relativeType = document.getElementById('relative').value;
   const notation = document.getElementById('notation').value;
+  const showDegrees = document.getElementById('showDegrees').checked;
+  const showChords = document.getElementById('showChords').checked;
 
   const scaleNotes = getScaleNotes(root, scaleType, relativeType);
   const tuning = tunings[instrument][tuningKey];
   const board = document.getElementById('fretboard');
 
   const numStrings = tuning.length;
-  const numFrets = 13;
+  const numFrets = 25;
 
   board.style.gridTemplateRows = `repeat(${numStrings}, 50px)`;
   board.style.gridTemplateColumns = `repeat(${numFrets}, 60px)`;
   board.innerHTML = '';
+
+  const rootIndex = notes.indexOf(root);
+  const scaleIntervals = scales[scaleType].intervals;
+  const degreesMap = new Map();
+
+  scaleIntervals.forEach((intv, idx) => {
+    const noteName = notes[(rootIndex + intv) % 12];
+    const degreeLabel = degreeNames[idx] || '';
+    const chordType = getChordType(intv);
+    degreesMap.set(noteName, { degree: degreeLabel, chord: noteName + chordType });
+  });
 
   [...tuning].reverse().forEach(openNote => {
     const openIndex = notes.indexOf(openNote);
@@ -108,8 +141,17 @@ function drawFretboard() {
       if (isInScale) {
         const noteEl = document.createElement('div');
         noteEl.className = 'note' + (isRoot ? ' root' : '');
+
         const noteIndex = notes.indexOf(note);
-        noteEl.textContent = notation === 'latin' && noteIndex !== -1 ? latinNotes[noteIndex] : note;
+        let display = notation === 'latin' && noteIndex !== -1 ? latinNotes[noteIndex] : note;
+
+        if (showDegrees && degreesMap.has(note)) {
+          display = degreesMap.get(note).degree;
+        } else if (showChords && degreesMap.has(note)) {
+          display = degreesMap.get(note).chord;
+        }
+
+        noteEl.textContent = display;
         cell.appendChild(noteEl);
       }
 
