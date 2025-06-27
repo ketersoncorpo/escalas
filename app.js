@@ -98,7 +98,7 @@ function drawFretboard() {
   board.style.gridTemplateColumns = `repeat(${numFrets}, 60px)`;
   board.innerHTML = '';
 
-  tuning.forEach(openNote => {
+  tuning.reverse().forEach(openNote => {
     const openIndex = notes.indexOf(openNote);
     for (let fret = 0; fret < numFrets; fret++) {
       const note = notes[(openIndex + fret) % 12];
