@@ -111,16 +111,24 @@ function drawFretboard() {
   const board = document.getElementById('fretboard');
 
   const numStrings = tuning.length;
-  const numFrets = 25;
+  const numFrets = 12;
 
   board.style.gridTemplateRows = `repeat(${numStrings}, 50px)`;
   board.style.gridTemplateColumns = `repeat(${numFrets}, 60px)`;
   
+  
+  // Eliminar numeración y marcadores si existen
+  const existingFretNumbers = document.getElementById('fret-numbers');
+  const existingMarkers = document.getElementById('marker-row');
+  if (existingFretNumbers) existingFretNumbers.remove();
+  if (existingMarkers) existingMarkers.remove();
+
   board.innerHTML = '';
+    
 
   // Agregar numeración de trastes
   const fretNumbersRow = document.createElement('div');
-  fretNumbersRow.classList.add('fret-numbers');
+  fretNumbersRow.id = 'fret-numbers';
   fretNumbersRow.style.display = 'grid';
   fretNumbersRow.style.gridTemplateColumns = `repeat(${numFrets}, 60px)`;
   fretNumbersRow.style.marginBottom = '4px';
@@ -134,12 +142,32 @@ function drawFretboard() {
   }
   board.parentElement.insertBefore(fretNumbersRow, board);
 
+  // Mostrar acordes como lista clara si está activado
+  const chordListDiv = document.getElementById('chord-list');
+  chordListDiv.innerHTML = '';
+
+  if (showChords) {
+    const list = document.createElement('div');
+    list.style.marginTop = '1rem';
+    list.innerHTML = '<strong>Acordes por grado:</strong><br>';
+
+    scaleIntervals.forEach((intv, idx) => {
+      const note = notes[(rootIndex + intv) % 12];
+      const degree = degreeNames[idx] || '';
+      const chord = getChordType(intv);
+      const name = note + chord;
+      list.innerHTML += `${degree}: ${name} &nbsp; `;
+    });
+
+    chordListDiv.appendChild(list);
+  }
+
   // Agregar puntos guía
   const markerFrets = [3, 5, 7, 9, 12, 15, 17, 19, 21, 24];
   const doubleMarkerFrets = [12, 24];
 
   const markerRow = document.createElement('div');
-  markerRow.classList.add('marker-row');
+  markerRow.id = 'marker-row';
   markerRow.style.display = 'grid';
   markerRow.style.gridTemplateColumns = `repeat(${numFrets}, 60px)`;
   markerRow.style.margin = '4px 0';
