@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visualizador de Escalas</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Visualizador de Escalas - Guitarra y Bajo</h1>
+  </header>
+
+  <main>
+    <section class="controls">
+      <label for="instrument">Instrumento:</label>
+      <select id="instrument">
+        <option value="guitar">Guitarra</option>
+        <option value="bass">Bajo</option>
+      </select>
+
+      <label for="tuning">Afinación:</label>
+      <select id="tuning"></select>
+
+      <label for="root">Nota raíz:</label>
+      <select id="root"></select>
+
+      <label for="scale">Escala:</label>
+      <select id="scale"></select>
+
+      <label for="relative">Ver relativa:</label>
+      <select id="relative">
+        <option value="none">Ninguna</option>
+        <option value="major">Relativa Mayor</option>
+        <option value="minor">Relativa Menor</option>
+      </select>
+
+      <button id="showButton">Mostrar escala</button>
+    </section>
+
+    <section id="fretboard" class="fretboard"></section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - Herramienta de Escalas Interactiva</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
