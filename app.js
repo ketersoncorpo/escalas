@@ -115,7 +115,47 @@ function drawFretboard() {
 
   board.style.gridTemplateRows = `repeat(${numStrings}, 50px)`;
   board.style.gridTemplateColumns = `repeat(${numFrets}, 60px)`;
+  
   board.innerHTML = '';
+
+  // Agregar numeración de trastes
+  const fretNumbersRow = document.createElement('div');
+  fretNumbersRow.classList.add('fret-numbers');
+  fretNumbersRow.style.display = 'grid';
+  fretNumbersRow.style.gridTemplateColumns = `repeat(${numFrets}, 60px)`;
+  fretNumbersRow.style.marginBottom = '4px';
+  for (let i = 0; i < numFrets; i++) {
+    const numberCell = document.createElement('div');
+    numberCell.style.textAlign = 'center';
+    numberCell.style.fontSize = '12px';
+    numberCell.style.padding = '2px';
+    numberCell.textContent = i;
+    fretNumbersRow.appendChild(numberCell);
+  }
+  board.parentElement.insertBefore(fretNumbersRow, board);
+
+  // Agregar puntos guía
+  const markerFrets = [3, 5, 7, 9, 12, 15, 17, 19, 21, 24];
+  const doubleMarkerFrets = [12, 24];
+
+  const markerRow = document.createElement('div');
+  markerRow.classList.add('marker-row');
+  markerRow.style.display = 'grid';
+  markerRow.style.gridTemplateColumns = `repeat(${numFrets}, 60px)`;
+  markerRow.style.margin = '4px 0';
+
+  for (let i = 0; i < numFrets; i++) {
+    const markerCell = document.createElement('div');
+    markerCell.style.textAlign = 'center';
+    markerCell.style.fontSize = '14px';
+    markerCell.innerHTML = markerFrets.includes(i)
+      ? (doubleMarkerFrets.includes(i) ? '••' : '•')
+      : '&nbsp;';
+    markerRow.appendChild(markerCell);
+  }
+
+  board.parentElement.insertBefore(markerRow, board);
+    
 
   const rootIndex = notes.indexOf(root);
   const scaleIntervals = scales[scaleType].intervals;
