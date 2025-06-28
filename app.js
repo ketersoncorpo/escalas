@@ -15,6 +15,11 @@ const tunings = {
 };
 
 const scales = {
+  armonica: [0, 2, 4, 5, 7, 8, 11],
+  jonico: [0, 2, 4, 5, 7, 9, 11],
+  eolico: [0, 2, 3, 5, 7, 8, 10],
+  menorArmonica: [0, 2, 3, 5, 7, 8, 11],
+  menorMelodica: [0, 2, 3, 5, 7, 9, 11],
   mayor: [0, 2, 4, 5, 7, 9, 11],
   menor: [0, 2, 3, 5, 7, 8, 10],
   pentatonicaMayor: [0, 2, 4, 7, 9],
@@ -39,6 +44,7 @@ function getNoteName(index, notation) {
 function populateSelects() {
   const root = document.getElementById("root");
   const scale = document.getElementById("scale");
+  scale.innerHTML = "";
   const tuning = document.getElementById("tuning");
 
   notesEnglish.forEach((note, i) => {
@@ -84,6 +90,7 @@ function displayScale() {
   const scaleType = document.getElementById("scale").value;
   const scaleIntervals = scales[scaleType];
   const notation = document.getElementById("notation").value;
+  document.querySelectorAll(".fret").forEach(f => f.removeAttribute("data-label"));
   const relative = document.getElementById("relative").value;
   const showDegrees = document.getElementById("showDegrees").checked;
 
@@ -104,7 +111,6 @@ function displayScale() {
 
   board.innerHTML = '';
 
-  // Números de trastes
   const fretNumbersRow = document.createElement('div');
   fretNumbersRow.id = 'fret-numbers';
   fretNumbersRow.style.display = 'grid';
@@ -120,7 +126,6 @@ function displayScale() {
   }
   board.parentElement.insertBefore(fretNumbersRow, board);
 
-  // Cuerdas
   for (let stringIndex = 0; stringIndex < tuning.length; stringIndex++) {
     const stringRow = document.createElement('div');
     stringRow.classList.add('string');
@@ -135,8 +140,10 @@ function displayScale() {
       if (scaleNotes.includes(noteIndex)) {
         const name = getNoteName(noteIndex, notation);
         const degree = scaleIntervals.indexOf((noteIndex - rootIndex + 12) % 12);
-        note.textContent = showDegrees && degree >= 0 ? degreeNames[degree] : name;
+        const label = showDegrees && degree >= 0 ? degreeNames[degree] : name;
+        note.setAttribute("data-label", label);
         note.classList.add("highlight");
+        if (degree === 0) note.classList.add("tonic");
       } else {
         note.textContent = "";
       }
@@ -147,7 +154,6 @@ function displayScale() {
     board.appendChild(stringRow);
   }
 
-  // Puntos de posición
   const markerPositions = [3, 5, 7, 9, 12];
   const markerRow = document.createElement('div');
   markerRow.id = 'marker-row';
@@ -169,7 +175,6 @@ function displayScale() {
   board.parentElement.appendChild(markerRow);
 }
 
-// Mostrar algo al iniciar
 window.addEventListener("DOMContentLoaded", () => {
   populateSelects();
   document.getElementById('showButton').click();
