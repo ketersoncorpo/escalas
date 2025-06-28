@@ -91,3 +91,31 @@ main {
   text-align: center;
   font-size: 16px;
 }
+
+
+.fretboard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0 auto;
+  width: max-content;
+}
+
+.string {
+  display: grid;
+  grid-template-columns: repeat(13, 60px);
+}
+
+.fret {
+  border: 1px solid #ccc;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.highlight {
+  background-color: #fdd835;
+  border-radius: 4px;
+}
