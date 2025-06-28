@@ -165,7 +165,21 @@ function drawFretboard() {
       const name = note + chord;
       const li = document.createElement('li');
       li.style.padding = '4px 8px';
-      li.style.background = '#eee';
+      
+      if (chord === '') {
+        li.style.background = '#cce5ff'; // Mayor - azul claro
+        li.style.color = '#004085';
+      } else if (chord === 'm') {
+        li.style.background = '#f8d7da'; // Menor - rojo claro
+        li.style.color = '#721c24';
+      } else if (chord === 'dim') {
+        li.style.background = '#d4edda'; // Disminuido - verde claro
+        li.style.color = '#155724';
+      } else {
+        li.style.background = '#eee';
+        li.style.color = '#000';
+      }
+    
       li.style.borderRadius = '8px';
       li.style.fontWeight = 'bold';
       li.textContent = `${degree}: ${name}`;
