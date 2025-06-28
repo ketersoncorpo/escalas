@@ -82,3 +82,12 @@ main {
   margin: 0 auto;
   width: max-content;
 }
+
+
+#chord-list {
+  display: block;
+  margin-top: 1rem;
+  max-width: 90%;
+  text-align: center;
+  font-size: 16px;
+}
