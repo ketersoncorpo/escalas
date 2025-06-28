@@ -5,3 +5,9 @@ window.addEventListener("DOMContentLoaded", () => {
   populateSelects();
   document.getElementById('showButton').click();
 });
+
+
+window.addEventListener("DOMContentLoaded", () => {
+  populateSelects();
+  document.getElementById('showButton').click();
+});
