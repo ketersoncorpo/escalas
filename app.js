@@ -15,21 +15,22 @@ const tunings = {
 };
 
 const scales = {
+  cromatica: [0,1,2,3,4,5,6,7,8,9,10,11],
   armonica: [0, 2, 4, 5, 7, 8, 11],
-  jonico: [0, 2, 4, 5, 7, 9, 11],
-  eolico: [0, 2, 3, 5, 7, 8, 10],
   menorArmonica: [0, 2, 3, 5, 7, 8, 11],
   menorMelodica: [0, 2, 3, 5, 7, 9, 11],
-  mayor: [0, 2, 4, 5, 7, 9, 11],
   menor: [0, 2, 3, 5, 7, 8, 10],
-  pentatonicaMayor: [0, 2, 4, 7, 9],
+  mayor: [0, 2, 4, 5, 7, 9, 11],
   pentatonicaMenor: [0, 3, 5, 7, 10],
+  pentatonicaMayor: [0, 2, 4, 7, 9],
   blues: [0, 3, 5, 6, 7, 10],
-  dorico: [0, 2, 3, 5, 7, 9, 10],
-  frigio: [0, 1, 3, 5, 7, 8, 10],
-  lidio: [0, 2, 4, 6, 7, 9, 11],
-  mixolidio: [0, 2, 4, 5, 7, 9, 10],
-  locrio: [0, 1, 3, 5, 6, 8, 10]
+  jonico(do): [0, 2, 4, 5, 7, 9, 11],
+  dorico(re): [0, 2, 3, 5, 7, 9, 10],
+  frigio(mi): [0, 1, 3, 5, 7, 8, 10],
+  lidio(fa): [0, 2, 4, 6, 7, 9, 11],
+  mixolidio(sol): [0, 2, 4, 5, 7, 9, 10],
+  eolico(la): [0, 2, 3, 5, 7, 8, 10],
+  locrio(si): [0, 1, 3, 5, 6, 8, 10]
 };
 
 const degreeNames = ["1ra", "2da", "3ra", "4ta", "5ta", "6ta", "7ma"];
@@ -59,6 +60,10 @@ function populateSelects() {
     opt.value = name;
     opt.textContent = name.charAt(0).toUpperCase() + name.slice(1);
     scale.appendChild(opt);
+
+    if (name === "cromatica") {
+     scale.selectedIndex = scale.options.length - 1;
+   }
   }
 
   updateTunings();
