@@ -111,7 +111,7 @@ function drawFretboard() {
   const board = document.getElementById('fretboard');
 
   const numStrings = tuning.length;
-  const numFrets = 12;
+  const numFrets = 13;
 
   board.style.gridTemplateRows = `repeat(${numStrings}, 50px)`;
   board.style.gridTemplateColumns = `repeat(${numFrets}, 60px)`;
@@ -149,7 +149,31 @@ function drawFretboard() {
   if (showChords) {
     const list = document.createElement('div');
     list.style.marginTop = '1rem';
-    list.innerHTML = '<strong>Acordes por grado:</strong><br>';
+    
+    list.innerHTML = '<strong>Acordes por grado:</strong>';
+    const chordUl = document.createElement('ul');
+    chordUl.style.listStyle = 'none';
+    chordUl.style.padding = '0';
+    chordUl.style.display = 'flex';
+    chordUl.style.flexWrap = 'wrap';
+    chordUl.style.gap = '10px';
+
+    scaleIntervals.forEach((intv, idx) => {
+      const note = notes[(rootIndex + intv) % 12];
+      const degree = degreeNames[idx] || '';
+      const chord = getChordType(intv);
+      const name = note + chord;
+      const li = document.createElement('li');
+      li.style.padding = '4px 8px';
+      li.style.background = '#eee';
+      li.style.borderRadius = '8px';
+      li.style.fontWeight = 'bold';
+      li.textContent = `${degree}: ${name}`;
+      chordUl.appendChild(li);
+    });
+
+    list.appendChild(chordUl);
+    
 
     scaleIntervals.forEach((intv, idx) => {
       const note = notes[(rootIndex + intv) % 12];

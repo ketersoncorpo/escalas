@@ -63,3 +63,10 @@ main {
   gap: 1px;
   margin-bottom: 4px;
 }
+
+
+.fretboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
