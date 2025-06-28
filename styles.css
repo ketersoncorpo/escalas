@@ -76,3 +76,9 @@ main {
   margin-top: 1rem;
   text-align: center;
 }
+
+
+.fretboard {
+  margin: 0 auto;
+  width: max-content;
+}

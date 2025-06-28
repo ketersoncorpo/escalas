@@ -111,7 +111,7 @@ function drawFretboard() {
   const board = document.getElementById('fretboard');
 
   const numStrings = tuning.length;
-  const numFrets = 13;
+  const numFrets = 13; // trastes 0 a 12
 
   board.style.gridTemplateRows = `repeat(${numStrings}, 50px)`;
   board.style.gridTemplateColumns = `repeat(${numFrets}, 60px)`;
