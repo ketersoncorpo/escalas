@@ -17,20 +17,20 @@ const tunings = {
 const scales = {
   cromatica: [0,1,2,3,4,5,6,7,8,9,10,11],
   armonica: [0, 2, 4, 5, 7, 8, 11],
+  jonico: [0, 2, 4, 5, 7, 9, 11],
+  eolico: [0, 2, 3, 5, 7, 8, 10],
   menorArmonica: [0, 2, 3, 5, 7, 8, 11],
   menorMelodica: [0, 2, 3, 5, 7, 9, 11],
-  menor: [0, 2, 3, 5, 7, 8, 10],
   mayor: [0, 2, 4, 5, 7, 9, 11],
-  pentatonicaMenor: [0, 3, 5, 7, 10],
+  menor: [0, 2, 3, 5, 7, 8, 10],
   pentatonicaMayor: [0, 2, 4, 7, 9],
+  pentatonicaMenor: [0, 3, 5, 7, 10],
   blues: [0, 3, 5, 6, 7, 10],
-  jonico(do): [0, 2, 4, 5, 7, 9, 11],
-  dorico(re): [0, 2, 3, 5, 7, 9, 10],
-  frigio(mi): [0, 1, 3, 5, 7, 8, 10],
-  lidio(fa): [0, 2, 4, 6, 7, 9, 11],
-  mixolidio(sol): [0, 2, 4, 5, 7, 9, 10],
-  eolico(la): [0, 2, 3, 5, 7, 8, 10],
-  locrio(si): [0, 1, 3, 5, 6, 8, 10]
+  dorico: [0, 2, 3, 5, 7, 9, 10],
+  frigio: [0, 1, 3, 5, 7, 8, 10],
+  lidio: [0, 2, 4, 6, 7, 9, 11],
+  mixolidio: [0, 2, 4, 5, 7, 9, 10],
+  locrio: [0, 1, 3, 5, 6, 8, 10]
 };
 
 const degreeNames = ["1ra", "2da", "3ra", "4ta", "5ta", "6ta", "7ma"];
@@ -45,7 +45,6 @@ function getNoteName(index, notation) {
 function populateSelects() {
   const root = document.getElementById("root");
   const scale = document.getElementById("scale");
-  scale.innerHTML = "";
   const tuning = document.getElementById("tuning");
 
   notesEnglish.forEach((note, i) => {
@@ -62,8 +61,8 @@ function populateSelects() {
     scale.appendChild(opt);
 
     if (name === "cromatica") {
-     scale.selectedIndex = scale.options.length - 1;
-   }
+      scale.selectedIndex = scale.options.length - 1;
+    }
   }
 
   updateTunings();
@@ -95,7 +94,6 @@ function displayScale() {
   const scaleType = document.getElementById("scale").value;
   const scaleIntervals = scales[scaleType];
   const notation = document.getElementById("notation").value;
-  document.querySelectorAll(".fret").forEach(f => f.removeAttribute("data-label"));
   const relative = document.getElementById("relative").value;
   const showDegrees = document.getElementById("showDegrees").checked;
 
@@ -149,8 +147,6 @@ function displayScale() {
         note.setAttribute("data-label", label);
         note.classList.add("highlight");
         if (degree === 0) note.classList.add("tonic");
-      } else {
-        note.textContent = "";
       }
 
       stringRow.appendChild(note);

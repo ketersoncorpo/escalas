@@ -36,28 +36,6 @@ header h1 {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-}
-
-.fret.highlight {
-  background-color: #fdd835;
-  color: #000;
-  border-radius: 50%;
-}
-
-.fret.tonic {
-  background-color: #e53935;
-  color: #fff;
-  border-radius: 50%;
-}
-
-
-.controls select,
-.controls label,
-.controls button {
-  margin: 4px;
-}
-
-.fret {
   position: relative;
 }
 
@@ -75,4 +53,16 @@ header h1 {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.fret.highlight {
+  background-color: #fdd835;
+  color: #000;
+  border-radius: 50%;
+}
+
+.fret.tonic {
+  background-color: #e53935;
+  color: #fff;
+  border-radius: 50%;
 }
