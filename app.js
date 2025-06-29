@@ -131,7 +131,7 @@ function displayScale() {
   }
   board.parentElement.insertBefore(fretNumbersRow, board);
 
-  for (let stringIndex = 0; stringIndex < tuning.length; stringIndex++) {
+  for (let stringIndex = tuning.length - 1; stringIndex >= 0; stringIndex--) {
     const stringRow = document.createElement('div');
     stringRow.classList.add('string');
 
