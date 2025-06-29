@@ -121,9 +121,11 @@ function displayScale() {
   fretNumbersRow.style.marginBottom = '4px';
   for (let i = 0; i < numFrets; i++) {
     const numberCell = document.createElement('div');
-    numberCell.style.textAlign = 'center';
+    numberCell.style.display = 'flex';
+    numberCell.style.alignItems = 'center';
+    numberCell.style.justifyContent = 'center';
+    numberCell.style.height = '30px';
     numberCell.style.fontSize = '12px';
-    numberCell.style.padding = '2px';
     numberCell.textContent = i;
     fretNumbersRow.appendChild(numberCell);
   }
@@ -164,7 +166,7 @@ function displayScale() {
 
   for (let i = 0; i < numFrets; i++) {
     const marker = document.createElement('div');
-    marker.style.textAlign = 'center';
+    marker.style.display = 'flex'; marker.style.alignItems = 'center'; marker.style.justifyContent = 'center';
     if (markerPositions.includes(i)) {
       marker.textContent = i === 12 ? '●●' : '●';
     } else {
